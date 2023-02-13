@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 // import { ContactForm } from './ContactForm';
 // import { ContactList } from './ContactList';
 
@@ -9,22 +9,17 @@ export class App extends Component {
     name: '',
   };
 
-  contactInputId = nanoid();
-
-  handleSubmit = (evt, id) => {
+  handleSubmit = evt => {
     evt.preventDefault();
+
     const { name } = this.state;
-    console.log(name, id);
     this.setState(state => ({
-      contacts: state.contacts.concat({ name: name }),
+      contacts: state.contacts.push({ name }),
     }));
   };
 
   handleChange = evt => {
-    const { id } = evt.target;
     this.setState({ name: evt.target.value });
-
-    return id;
   };
 
   render() {
@@ -50,7 +45,6 @@ export class App extends Component {
             <input
               type="text"
               name="name"
-              id={this.contactInputId}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
