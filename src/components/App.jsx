@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 // import { ContactForm } from './ContactForm';
 // import { ContactList } from './ContactList';
 
@@ -11,11 +11,13 @@ export class App extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-
     const { name } = this.state;
+    console.log(name);
+    id = nanoid();
     this.setState(state => ({
-      contacts: state.contacts.push({ name }),
+      contacts: state.contacts.concat({ name, id }),
     }));
+    console.log(this.state.contacts);
   };
 
   handleChange = evt => {
@@ -40,7 +42,7 @@ export class App extends Component {
       >
         <h2>Phonebook</h2>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor={this.contactInputId}>
+          <label>
             Name
             <input
               type="text"
