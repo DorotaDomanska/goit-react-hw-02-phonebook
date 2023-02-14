@@ -12,12 +12,10 @@ export class App extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const { name } = this.state;
-    console.log(name);
     id = nanoid();
     this.setState(state => ({
       contacts: state.contacts.concat({ name, id }),
     }));
-    console.log(this.state.contacts);
   };
 
   handleChange = evt => {
