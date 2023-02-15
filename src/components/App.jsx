@@ -8,19 +8,21 @@ export class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const { name } = this.state;
+    const { name, number } = this.state;
     const id = nanoid();
     this.setState(state => ({
-      contacts: state.contacts.concat({ name, id }),
+      contacts: state.contacts.concat({ name, number, id }),
     }));
   };
 
   handleChange = evt => {
-    this.setState({ name: evt.target.value });
+    const { name } = evt.target;
+    this.setState({ [name]: evt.target.value });
   };
 
   render() {
@@ -30,10 +32,11 @@ export class App extends Component {
       <div
         style={{
           height: '100vh',
+          padding: '0px 50px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           textAlign: 'left',
           fontSize: 40,
           color: '#010101',
@@ -41,7 +44,7 @@ export class App extends Component {
       >
         <h2>Phonebook</h2>
         <form className={css.form} onSubmit={this.handleSubmit}>
-          <label className={css.label}>
+          <label htmlFor="name" className={css.label}>
             Name
             <input
               type="text"
@@ -52,12 +55,27 @@ export class App extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <button className={css.button} type="submit">Add contact</button>
+          <label htmlFor="number" className={css.label}>
+            Number
+            <input
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              onChange={this.handleChange}
+            />
+          </label>
+          <button className={css.button} type="submit">
+            Add contact
+          </button>
         </form>
         <h2>Contacts</h2>
-        <ul>
-          {contacts.map(({ name, id }) => (
-            <li key={id}>{name}</li>
+        <ul className={css.list}>
+          {contacts.map(({ name, number, id }) => (
+            <li key={id}>
+              {name}: {number}
+            </li>
           ))}
         </ul>
         {/* <ContactForm />
