@@ -23,6 +23,15 @@ export class App extends Component {
     }));
   };
 
+  handleDelete = contactId => {
+    const currentContacts = this.state.contacts.filter(
+      contact => contact.id !== contactId
+    );
+    this.setState(() => ({
+      contacts: currentContacts,
+    }));
+  };
+
   handleInput = text => {
     this.setState({
       filter: text,
@@ -53,7 +62,10 @@ export class App extends Component {
         <ContactForm myContacts={contacts} onFormSubmit={this.handleSubmit} />
         <h2 className={css.header}>Contacts</h2>
         <Filter onFilter={this.handleInput} />
-        <ContactList myFilteredContacts={filteredContacts} />
+        <ContactList
+          myFilteredContacts={filteredContacts}
+          onDelete={this.handleDelete}
+        />
       </div>
     );
   }

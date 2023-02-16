@@ -4,11 +4,11 @@ import css from './Phonebook.module.css';
 
 export class ContactList extends Component {
   render() {
-    const { myFilteredContacts } = this.props;
+    const { myFilteredContacts, onDelete } = this.props;
 
     return (
       <ul className={css.list}>
-        <ContactListItem myFilteredContacts={myFilteredContacts} />
+        <ContactListItem myFilteredContacts={myFilteredContacts} onDelete={onDelete} />
       </ul>
     );
   }
