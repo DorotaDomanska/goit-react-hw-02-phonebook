@@ -50,7 +50,7 @@ export class App extends Component {
         }}
       >
         <h1 className={css.header}>Phonebook</h1>
-        <ContactForm onFormSubmit={this.handleSubmit} />
+        <ContactForm myContacts={contacts} onFormSubmit={this.handleSubmit} />
         <h2 className={css.header}>Contacts</h2>
         <Filter onFilter={this.handleInput} />
         <ContactList myFilteredContacts={filteredContacts} />

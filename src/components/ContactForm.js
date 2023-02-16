@@ -14,10 +14,14 @@ export class ContactForm extends Component {
 
   onButtonSubmit = evt => {
     evt.preventDefault();
-    const { onFormSubmit } = this.props;
+    const { myContacts, onFormSubmit } = this.props;
     const { name, number } = this.state;
-
-    onFormSubmit(name, number);
+    const sameName = myContacts.some(
+      contacts => contacts.name.toLowerCase() === name.toLowerCase()
+    );
+    sameName
+      ? alert(`${name} is already in contacts.`)
+      : onFormSubmit(name, number);
   };
 
   render() {
