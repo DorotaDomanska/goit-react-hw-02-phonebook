@@ -32,22 +32,17 @@ export class App extends Component {
   };
 
   handleInput = evt => {
-    const text = evt.target.value;
-    const filteredContacts = this.handleFilter(text);
+    console.log(evt.target.value);
     this.setState({
-      contacts: filteredContacts,
+      filter: evt.target.value,
     });
   };
 
-  handleFilter = text => {
-    const { contacts } = this.state;
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(text.toLowerCase())
-    );
-  };
-
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
     return (
       <div
@@ -97,7 +92,7 @@ export class App extends Component {
           <input type="text" name="filter" onInput={this.handleInput}></input>
         </label>
         <ul className={css.list}>
-          {contacts.map(({ name, number, id }) => (
+          {filteredContacts.map(({ name, number, id }) => (
             <li key={id}>
               {name}: {number}
             </li>
